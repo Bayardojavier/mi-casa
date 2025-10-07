@@ -1,0 +1,437 @@
+/* ---------------------------------------------------- */
+/* ProjectList.css - CÓDIGO FINAL CORREGIDO Y UNIFICADO */
+/* ---------------------------------------------------- */
+
+/* --------------------------------
+ * SECCIÓN 1: Contenedor Principal y Encabezado 
+ * -------------------------------- */
+
+.project-list-container { 
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 15px;
+    text-align: center; 
+    font-family: "Arial", sans-serif;
+}
+
+/* 🔑 CORRECCIÓN DEL TÍTULO PRINCIPAL */
+.project-list-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-top: 0.5rem; 
+    margin-bottom: 0.2rem; 
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center; 
+    gap: 5px; 
+    
+    /* Máximo ancho para dejar espacio al menú fijo en la esquina */
+    max-width: 80%; 
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* 🔑 CORRECCIÓN DEL SUBTÍTULO */
+.project-list-container > p {
+    color: #34495e; 
+    margin-top: 0; 
+    margin-bottom: 0.5rem; 
+}
+
+.projects-wrapper { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 24px;
+    margin-top: 1rem; 
+}
+
+/* --------------------------------
+ * SECCIÓN 2: Botones de Acción Principales (YA ELIMINADOS)
+ * -------------------------------- */
+.create-project-list-button {
+    padding: 12px 20px;
+    background-color: #2ecc71; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-project-list-button:hover {
+    background-color: #27ae60;
+}
+
+
+/* --------------------------------
+ * SECCIÓN 3: Tarjeta de Proyecto
+ * -------------------------------- */
+.project-card-dark { 
+    position: relative;
+    background-color: white; 
+    color: #2c3e50; 
+    padding: 1rem; 
+    border-radius: 0.75rem; 
+    border-left: 5px solid #3498db; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    cursor: default; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px; 
+    transition: all 0.2s ease-in-out;
+    text-align: left; 
+}
+
+.project-card-dark:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    background-color: #f9f9f9;
+}
+
+.project-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 2px; 
+    color: #3498db; 
+    padding-right: 30px; 
+    line-height: 1.2; 
+}
+
+
+/* --------------------------------
+ * SECCIÓN 4: Bloques de Resumen
+ * -------------------------------- */
+.project-summary-box {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin: 8px 0; 
+    padding: 5px 0;
+    border-top: 1px dashed #bdc3c7;
+    border-bottom: 1px dashed #bdc3c7;
+}
+
+.summary-item {
+    margin: 0; 
+    font-size: 0.95rem; 
+    color: #34495e; 
+    flex-basis: 50%; 
+}
+
+.project-details-info {
+    font-size: 0.95rem;
+    margin-bottom: 10px; 
+}
+
+.project-details-info p {
+    margin: 2px 0; 
+    color: #34495e; 
+}
+
+.text-green-avance { color: #2ecc71; font-weight: 800; margin-left: 0.5rem; } 
+.text-yellow-costo { color: #f1c40f; font-weight: 800; margin-left: 0.5rem; } 
+
+
+/* --------------------------------
+ * SECCIÓN 5: Botones de Acción de Tarjeta
+ * -------------------------------- */
+.card-actions-row {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; 
+    justify-content: space-between;
+}
+
+.go-to-project-button, .project-report-btn {
+    flex-grow: 1; 
+    padding: 10px 5px; 
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+}
+
+.go-to-project-button { background-color: #3498db; color: white; }
+.go-to-project-button:hover { background-color: #2980b9; }
+
+.project-report-btn { background-color: #e67e22; color: white; }
+.project-report-btn:hover { background-color: #d35400; }
+
+/* --------------------------------
+ * SECCIÓN 6: Icono de Exportar
+ * -------------------------------- */
+
+.export-icon-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    padding: 0;
+    line-height: 1; 
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 10;
+}
+
+.export-icon-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* --------------------------------
+ * SECCIÓN 7: Estilos de Modal
+ * -------------------------------- */
+
+.modal-backdrop-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.create-form-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.input-details-form {
+    color: #2c3e50;
+    padding: 10px;
+}
+
+.form-actions-details {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ESTILOS DE BOTONES DENTRO DEL FORMULARIO */
+.submit-button {
+    background-color: #2ecc71; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #27ae60;
+}
+
+.cancel-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cancel-button:hover {
+    background-color: #c0392b;
+}
+
+.back-button {
+    background: #3498db;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-right: auto; 
+}
+.back-button:hover {
+    background: #2980b9; 
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-weight: 600;
+    text-align: left;
+}
+
+.text-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+/* ---------------------------------------------------- */
+/* SECCIÓN 9: Menú de Acciones Fijas (Importar/Nuevo) - CORREGIDO PARA AUTOHIDE Y POSICIÓN */
+/* ---------------------------------------------------- */
+
+/* Contenedor principal del menú: CLAVE para el autohide en React */
+.corner-menu-container {
+    position: fixed; 
+    top: 10px; 
+    right: 15px; 
+    z-index: 1000; 
+    
+    /* 🔑 CORRECCIÓN CLAVE: Fuerza al contenedor padre a abarcar el área del menú */
+    width: 200px; /* Ancho del menú desplegable */
+    height: 180px; /* Suficiente altura para incluir el botón y el menú */
+}
+
+/* Botón de control (el ícono de engranaje) */
+.menu-toggle-button {
+    background-color: #2980b9; 
+    color: white;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%; 
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Asegura que el botón se alinee con el 'right: 0' del contenedor padre */
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menu-toggle-button:hover {
+    background-color: #3498db;
+    transform: rotate(45deg); 
+}
+
+/* Contenedor del menú desplegable */
+.menu-dropdown {
+    position: absolute;
+    /* 🔑 AJUSTE CLAVE: Se posiciona justo debajo del botón (50px de altura + 10px de margen) */
+    top: 60px; 
+    right: 0;
+    width: 200px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: fadeIn 0.3s ease-out; 
+}
+
+/* Estilo para los botones de acción dentro del menú */
+.menu-action-button {
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: left;
+    border: none;
+    display: block; 
+    width: 100%;
+}
+
+.menu-import { background-color: #27ae60; color: white; }
+.menu-import:hover { background-color: #2ecc71; }
+
+.menu-new-project { background-color: #e67e22; color: white; }
+.menu-new-project:hover { background-color: #f39c12; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------- */
+/* SECCIÓN 8: MEDIA QUERIES (RESPONSIVIDAD MÓVIL) */
+/* ---------------------------------------------------- */
+
+@media (max-width: 600px) {
+    
+    .project-list-container { padding: 1rem 10px; }
+    
+    /* Ajuste del título para móvil: Lo limitamos para que no choque */
+    .project-list-title {
+        font-size: 1.8rem;
+        max-width: calc(100% - 70px); 
+        text-align: left; 
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    /* 🔑 Ajuste de la posición y TAMAÑO del menú para móvil */
+    .corner-menu-container {
+        right: 5px; 
+        top: 5px; 
+        width: 180px; /* Ajuste el ancho para pantallas pequeñas */
+        height: 170px; /* Mantener la altura de "seguridad" */
+    }
+    
+    .menu-toggle-button {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .menu-dropdown {
+        top: 55px; /* Ajuste basado en la nueva altura del botón de 45px + margen */
+        width: 170px;
+    }
+    
+    /* Contenido de la Tarjeta */
+    .projects-wrapper { grid-template-columns: 1fr; gap: 15px; }
+    .project-card-dark { padding: 0.8rem; min-height: auto; }
+    .project-name { font-size: 1.3rem; }
+    .project-summary-box { padding: 5px 0; }
+    .summary-item { font-size: 0.9rem; }
+    .card-actions-row { gap: 5px; margin-top: 10px; }
+    .go-to-project-button, .project-report-btn { font-size: 0.85rem; padding: 10px 5px; }
+    .create-form-content { width: 95%; padding: 15px; }
+}
+
+/* Estilos para Pantallas Medianas (ej. Tabletas) */
+@media (min-width: 601px) and (max-width: 900px) {
+    .projects-wrapper { 
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+        gap: 20px;
+    }
+    .project-list-title {
+        font-size: 2.2rem;
+    }
+}

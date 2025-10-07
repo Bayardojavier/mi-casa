@@ -1,0 +1,718 @@
+/* ==================================================================== */
+/* 0. VARIABLES DE COLOR (Adaptadas de ProjectBody.css) */
+/* ==================================================================== */
+:root {
+    /* Colores primarios y de texto del ProjectBody */
+    --color-primary: #3498db;          
+    --color-primary-dark: #2980b9;     
+    --color-text-dark: #2c3e50;        
+    --color-text-light: #6c757d;       
+    
+    /* Colores de fondo y neutros */
+    --color-background-primary: #f4f7f9; 
+    --color-white: #ffffff;
+    --color-border: #bdc3c7;           
+    --color-neutral-light: #ecf0f1;    
+    --color-neutral-lightest: #f6f6f6; 
+
+    /* Colores funcionales */
+    --color-success: #2ecc71;          
+    --color-success-dark: #27ae60;
+    --color-danger: #e74c3c;           
+    --color-danger-dark: #c0392b;
+    --color-warning: #f39c12;          
+    
+    --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+/* ==================================================================== */
+/* 1. LAYOUT PRINCIPAL Y CONTENEDOR DE SCROLL */
+/* ==================================================================== */
+
+.materials-inventory-container {
+    height: 100vh;
+    overflow-y: auto; 
+    background-color: var(--color-background-primary);
+    color: var(--color-text-dark);
+    font-family: Arial, sans-serif; 
+    padding: 0; 
+}
+
+/* ==================================================================== */
+/* 2. HEADER Y MENÚ (STUNNING STICKY) */
+/* ==================================================================== */
+
+.module-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: var(--color-white); 
+    color: var(--color-text-dark);
+    box-shadow: var(--shadow-default);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.module-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-primary-dark);
+}
+
+/* Botones de control del Header (Menú Hamburguesa y Cerrar) */
+.hamburger-menu-tool-button, .close-tool-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    color: var(--color-text-dark);
+    transition: color 0.2s;
+}
+
+.close-tool-button {
+    font-size: 2rem; 
+    color: var(--color-danger); 
+    line-height: 1;
+    font-weight: 300;
+}
+
+.hamburger-menu-tool-button:hover {
+    color: var(--color-primary);
+}
+
+.close-tool-button:hover {
+    color: var(--color-danger-dark);
+}
+
+
+/* CLAVE: El menú de pestañas debe ser sticky justo debajo del header */
+.inventory-tab-menu-colored {
+    position: sticky;
+    top: 61px; /* Ajuste de altura */
+    z-index: 90; 
+    
+    display: flex;
+    background-color: var(--color-neutral-light); /* Fondo gris claro */
+    border-bottom: 3px solid var(--color-primary); 
+    padding: 0 25px;
+}
+
+.tab-button-colored {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600; 
+    color: var(--color-text-dark);
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent; 
+    margin-bottom: -3px; 
+}
+
+.tab-button-colored:hover {
+    color: var(--color-primary-dark);
+}
+
+.tab-button-colored.active {
+    color: var(--color-primary);
+    font-weight: 700;
+    border-bottom: 3px solid var(--color-primary); 
+    background-color: var(--color-white); 
+}
+
+/* ==================================================================== */
+/* 3. CONTENIDO DINÁMICO (Scrollable Area) */
+/* ==================================================================== */
+
+.module-content {
+    padding: 20px 25px 50px 25px; 
+}
+
+.tab-content {
+    background-color: var(--color-white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-default);
+}
+
+.tab-description {
+    color: var(--color-text-light);
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 10px;
+}
+
+/* ==================================================================== */
+/* 4. ESTILOS DE FORMULARIO (PurchaseForm & SalesAndDisposalForm & Catalog) */
+/* ==================================================================== */
+
+.purchase-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-section-header {
+    background-color: var(--color-neutral-light);
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+/* Base de Grid para Encabezados (Compra/Venta) */
+.header-grid {
+    display: grid;
+    /* Usado por PurchaseForm y Sales/Disposal header (2 columnas en móvil) */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* Base de Grid para Items (Compra) */
+.add-item-grid {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1.5fr 0.5fr; 
+    gap: 15px;
+    align-items: center;
+}
+
+/* NUEVAS REGLAS para SalesAndDisposalForm (Escritorio) */
+/* Modo Venta: 5 columnas (Material, Unidad, Cantidad, Precio, Botón) */
+.grid-sale-mode {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1.5fr 1fr; 
+    gap: 15px;
+    align-items: center;
+}
+
+/* Modo Baja: 4 columnas (Material, Unidad, Cantidad, Botón) */
+.grid-disposal-mode {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr; 
+    gap: 15px;
+    align-items: center;
+}
+
+/* NUEVAS REGLAS para CatalogManager (Escritorio) */
+.catalog-form-grid {
+    display: grid;
+    /* Nombre (40%), Unidades (40%), Botón (20%) */
+    grid-template-columns: 2fr 2fr 1fr; 
+    gap: 15px;
+    align-items: flex-end; /* Alinea el botón con los campos */
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    background-color: var(--color-white);
+}
+
+/* Estilos específicos para radio buttons de Venta/Baja */
+.radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-top: 10px;
+}
+
+/* ==================================================================== */
+/* 5. TABLAS Y BOTONES */
+/* ==================================================================== */
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.items-table th, .items-table td {
+    border: 1px solid var(--color-border);
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.items-table th {
+    background-color: var(--color-neutral-light);
+    font-weight: 700;
+    color: var(--color-text-dark); 
+}
+
+.items-table .total-row {
+    font-weight: 700;
+    background-color: var(--color-neutral-lightest);
+}
+
+.items-table .total-row td:last-child {
+    color: var(--color-primary-dark);
+}
+
+/* Botones de Acción y Submit */
+.action-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.add-button {
+    background-color: var(--color-success);
+    color: var(--color-white);
+}
+
+.add-button:hover {
+    background-color: var(--color-success-dark);
+}
+
+.remove-button {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    font-size: 0.85rem;
+    padding: 6px 10px;
+}
+
+.remove-button:hover {
+    background-color: var(--color-danger-dark);
+}
+
+.submit-button-large {
+    padding: 15px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.submit-button-large:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* AJUSTES PARA EL BOTÓN DE AÑADIR/REGISTRAR EN LAS CUADRÍCULAS */
+.disposal-submit-button-group {
+    display: flex; 
+    align-items: flex-end; 
+}
+
+.disposal-submit-button-group .submit-button-large {
+    width: 100%; 
+    padding: 10px 0;
+    margin-top: 0; 
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.catalog-add-button {
+    height: 40px;
+    padding: 0 15px;
+    margin-top: 0 !important; 
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* CLAVE: Contenedor de scroll para la tabla del catálogo */
+.scrollable-table-container {
+    max-height: 400px; /* Altura máxima antes de que aparezca el scroll vertical */
+    overflow-y: auto;  /* Scroll vertical */
+    overflow-x: auto;  /* Permite el scroll horizontal */
+    border: 1px solid var(--color-border); 
+    border-radius: 6px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); 
+}
+
+/* Asegura que la tabla dentro del contenedor ocupe al menos el 100% */
+.scrollable-table-container .items-table {
+    width: auto; 
+    min-width: 100%; 
+    margin-top: 0; 
+}
+
+/* Fija el encabezado de la tabla dentro del scroll vertical y horizontal */
+.scrollable-table-container .items-table thead th {
+    position: sticky;
+    top: 0;
+    left: 0; /* Asegura que el encabezado no se mueva con el scroll horizontal */
+    background-color: var(--color-neutral-light);
+    z-index: 10;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); 
+}
+
+
+/* ==================================================================== */
+/* 6. MENÚ HAMBURGUESA Y VARIOS (Versión ESCRITORIO) */
+/* ==================================================================== */
+
+/* CLAVE: ESTILO DEL CONTENEDOR DEL MENÚ EN ESCRITORIO */
+.tools-dropdown-menu-content {
+    /* Estilos base para el menú */
+    position: fixed;
+    top: 61px; /* Debajo del header */
+    left: 0;
+    width: 250px; 
+    background-color: var(--color-white);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+    padding: 10px 0;
+    height: calc(100vh - 61px); 
+    overflow-y: auto;
+}
+
+/* En escritorio, el overlay (backdrop) no debe aparecer */
+.tools-dropdown-menu-overlay {
+    display: none; 
+}
+
+/* El botón de cierre móvil no debe aparecer en escritorio */
+.close-menu-button-mobile {
+    display: none; 
+}
+
+.menu-title {
+    font-weight: 700;
+    padding: 10px 15px;
+    color: var(--color-primary-dark); 
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 5px;
+}
+
+.tool-menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+}
+
+.tool-menu-item:hover {
+    background-color: var(--color-neutral-lightest);
+    color: var(--color-primary-dark);
+}
+
+.tool-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* ==================================================================== */
+/* 7. RESPONSIVE DESIGN PARA MÓVILES (Max-Width: 768px - CORRECCIÓN FINAL) */
+/* ==================================================================== */
+
+@media (max-width: 768px) {
+    
+    /* --- Contenedor Principal y Header (Ajustes de padding) --- */
+    .module-header, .inventory-tab-menu-colored {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .module-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .module-content {
+        padding: 15px 10px 30px 10px; 
+    }
+    
+    .tab-button-colored {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    /* 🔑 RESTAURACIÓN DE FORMULARIO Y GRIDS EN MÓVIL 🔑 */
+    
+    /* 1. Encabezado de la factura y Venta/Baja Header (Header Grid) */
+    .header-grid {
+        /* Pasa de múltiples columnas a 2 columnas en móvil */
+        grid-template-columns: 1fr 1fr !important; 
+        gap: 10px; 
+    }
+    
+    /* 2. Cuadrículas de Añadir/Retirar Ítems: Se fuerzan a una sola columna en móvil */
+    .add-item-grid,
+    .grid-sale-mode, 
+    .grid-disposal-mode,
+    .catalog-form-grid { 
+        grid-template-columns: 1fr !important; /* ¡FUERZA A UNA COLUMNA! */
+        gap: 10px;
+    }
+    
+    /* 3. Ajuste del Botón Submit dentro de las cuadrículas (Venta/Baja, Compra y Catálogo) */
+    .add-item-grid .submit-button-large,
+    .disposal-submit-button-group .submit-button-large,
+    .catalog-add-button { 
+        /* El botón de añadir/registrar ocupa todo el ancho */
+        width: 100%;
+        padding: 12px; 
+        margin-top: 5px; 
+        font-size: 1rem;
+    }
+
+    /* 🔑 AJUSTES DE SCROLL Y TABLAS 🔑 */
+    
+    .scrollable-table-container {
+        max-height: 300px; /* Reducimos un poco la altura en móvil */
+        overflow-x: auto; /* Mantiene el scroll horizontal */
+    }
+
+    /* --- TABLAS RESPONSIVE (Inventario, Compras, etc.) --- */
+    /* Estas reglas SÍ se aplican a las tablas de Inventario, Compras y Venta/Baja */
+    .items-table thead {
+        display: none; /* Oculta los encabezados */
+    }
+    
+    .items-table td {
+        display: flex; 
+        justify-content: space-between; 
+        text-align: right;
+        padding: 8px 0;
+        border: none;
+        border-bottom: 1px dashed var(--color-neutral-light); 
+        font-size: 0.9em;
+    }
+    
+    .items-table td::before {
+        content: attr(data-label); /* Muestra el nombre de la columna como etiqueta */
+        font-weight: bold;
+        text-align: left;
+        color: var(--color-text-light);
+        min-width: 120px; 
+    }
+
+    /* 🔑 ANULA el modo responsive de "tarjeta" SOLO para la tabla del Catálogo (dentro del contenedor) */
+    .scrollable-table-container .items-table thead {
+        display: table-header-group !important; /* Muestra el encabezado */
+    }
+    
+    .scrollable-table-container .items-table td {
+        display: table-cell !important; /* Restaura el modo celda */
+        text-align: left !important;
+        padding: 10px !important;
+        border: 1px solid var(--color-border) !important; /* Restaura el borde */
+        border-bottom: 1px solid var(--color-border) !important; 
+    }
+    
+    .scrollable-table-container .items-table td::before {
+        content: none !important; /* Oculta las etiquetas de datos (data-label) */
+    }
+    
+    /* --- MENÚ HAMBURGUESA: MÓVIL (OFF-CANVAS) --- */
+    
+    /* 🔑 OVERLAY/BACKDROP (Fondo oscuro) - Cierra al hacer clic */
+    .tools-dropdown-menu-overlay {
+        display: block; 
+        position: fixed;
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.4); 
+        z-index: 199; 
+        transition: opacity 0.2s; 
+    }
+
+    /* 🔑 CONTENIDO DEL MENÚ DESLIZABLE (la barra blanca) */
+    .tools-dropdown-menu-content {
+        /* Sobrescribe los estilos de escritorio */
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 75%; 
+        max-width: 280px; 
+        height: 100%; 
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 200; 
+        padding-top: 50px; 
+    }
+    
+    /* --- Botón de Cierre del Menú Móvil (X) --- */
+    .close-menu-button-mobile {
+        display: block; 
+        position: absolute;
+        top: 10px;
+        right: 15px; 
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.8rem;
+        color: var(--color-text-light);
+        z-index: 201; 
+        padding: 5px;
+    }
+
+    .close-menu-button-mobile:hover {
+        color: var(--color-danger);
+    }
+}
+
+/* src/components/Material/MaterialsInventory.css */
+
+/* src/components/Material/MaterialsInventory.css */
+
+/* ... (Mantén los estilos de .materials-inventory-container, .module-header, etc.) ... */
+
+/* --- Estilos para la Vista Dinámica de Inventario (REVISADOS) --- */
+
+.inventory-dynamic-view {
+    padding: 15px;
+    overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
+}
+
+.grouping-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.group-option-button {
+    /* ... (Estilos de botón se mantienen) ... */
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.2s;
+    font-size: 0.9em;
+}
+
+/* 🔑 CLAVE: Estilos de la tabla dinámica */
+.dynamic-movements-table {
+    width: 100%;
+    border-collapse: collapse; /* Asegura bordes limpios */
+    table-layout: fixed; /* Mantiene el ancho de las columnas fijo */
+}
+
+.dynamic-movements-table th, 
+.dynamic-movements-table td {
+    padding: 10px 12px;
+    font-size: 0.9em;
+    border: 1px solid #eee; /* Bordes suaves para mejor visibilidad */
+    text-align: left; /* Por defecto a la izquierda */
+}
+
+.dynamic-movements-table thead th {
+    background-color: #3f51b5; /* Azul oscuro para encabezado */
+    color: white;
+    font-weight: 600;
+    position: sticky; /* Encabezado fijo al hacer scroll */
+    top: 0;
+    z-index: 10;
+}
+
+/* 🔑 Definición de ancho de columnas (Necesario con table-layout: fixed) */
+.dynamic-movements-table .group-col-header, .dynamic-movements-table .group-col-indent { 
+    width: 5%; 
+    min-width: 30px; 
+}
+.dynamic-movements-table th:nth-child(2) { width: 10%; } /* ID */
+.dynamic-movements-table th:nth-child(3) { width: 15%; } /* Material */
+.dynamic-movements-table th:nth-child(4) { width: 8%; } /* Unidad */
+.dynamic-movements-table .qty-col         { width: 10%; text-align: right; } /* Cantidad (Columna 5) */
+.dynamic-movements-table .cost-col         { width: 12%; text-align: right; } /* Costo (Columna 6 & 7) */
+.dynamic-movements-table .mode-col         { width: 10%; text-align: center; } /* Tipo (Columna 8) */
+.dynamic-movements-table .date-col         { width: 12%; text-align: right; } /* Fecha (Columna 9) */
+
+
+/* Fila de Encabezado de Grupo */
+.group-header-row {
+    cursor: pointer;
+    background-color: #c5d0f1; /* Azul claro para la fila de grupo */
+    font-weight: bold;
+    border-bottom: 3px solid #3f51b5; /* Línea separadora fuerte */
+}
+
+.group-header-row:hover {
+    background-color: #b0bfeb;
+}
+
+.group-header-row .group-col-title {
+    padding-left: 20px !important;
+    text-align: left;
+    font-size: 1em;
+}
+
+/* Total de Cantidad del grupo (Columna 5) */
+.group-header-row .qty-col.total {
+    text-align: right;
+}
+
+/* Totales de Costo y Venta (Agrupados a la derecha) */
+.group-header-row .total-summary-cost,
+.group-header-row .total-summary-sale {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Filas de Detalle */
+.detail-row {
+    background-color: #f7f9fc; /* Gris muy claro para los detalles */
+}
+
+/* Indentado visual en la columna de grupo */
+.group-col-indent {
+    background-color: #f0f0f0;
+    border-right: 1px solid #ddd;
+}
+
+
+/* Alineación de datos en filas de detalle */
+.detail-row .qty-col,
+.detail-row .cost-col,
+.detail-row .date-col {
+    text-align: right;
+}
+
+.detail-row .mode-col {
+    text-align: center;
+}
+
+/* Colores de movimiento */
+.movement-in {
+    color: #1a73e8; /* Azul para entradas (Compra) */
+}
+
+.movement-out {
+    color: #d93025; /* Rojo para salidas (Venta/Baja) */
+}

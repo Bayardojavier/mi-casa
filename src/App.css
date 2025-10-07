@@ -1,0 +1,137 @@
+/* src/App.css */
+:root{
+  --sidebar-width: 240px;
+  --green: #2e8b57;
+  --bg: #f7f7f7;
+}
+
+/* Layout */
+.app-root{
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Sidebar */
+.sidebar{
+  width: var(--sidebar-width);
+  background: var(--green);
+  color: #fff;
+  padding: 18px;
+  box-sizing: border-box;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+.sidebar .sidebar-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar h2{
+  margin: 0;
+  font-size: 18px;
+}
+.close-btn{
+  display: none;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.menu-list{
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
+.menu-list .divider{
+  margin: 14px 0 8px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+.menu-btn{
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px 6px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.menu-btn:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+/* Main area */
+.main-area{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* Header */
+.app-header{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: white;
+  border-bottom: 1px solid #e6e6e6;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+.hamburger{
+  display: none;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.header-title h1{
+  margin: 0;
+  font-size: 18px;
+}
+.header-title small{
+  display: block;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Content */
+.content{
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Responsive - mobile */
+@media (max-width: 800px){
+  .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-120%);
+    z-index: 1200;
+    width: 80%;
+    max-width: 320px;
+  }
+  .sidebar.open{
+    transform: translateX(0);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .close-btn{
+    display: inline-block;
+  }
+  .hamburger{
+    display: inline-block;
+  }
+  .main-area{
+    margin-left: 0;
+  }
+}

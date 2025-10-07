@@ -1,0 +1,265 @@
+* ---------------------------------------------------- */
+/* ProjectBody.css - Estilos para el Dashboard Detallado */
+/* ---------------------------------------------------- */
+
+.project-body-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    position: relative; /* Necesario para posicionar elementos internos (si fuera necesario) */
+}
+
+/* --------------------------------
+ * ENCABEZADO Y BOTÓN DE CIERRE
+ * -------------------------------- */
+.project-body-header {
+    display: flex;
+    flex-direction: column; /* Apilar el título y el sumario */
+    align-items: center;
+    text-align: center;
+    margin-bottom: 25px;
+    position: relative; /* CRUCIAL para que el botón de cierre se posicione correctamente */
+}
+
+.project-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    max-width: 90%; 
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.project-title-icon {
+    font-size: 1.8rem; /* Un poco más pequeño que el tamaño del título */
+    line-height: 1; 
+}
+
+/* 🔑 1. ESTILO DEL BOTÓN DE CIERRE (X en la esquina) 🔑 */
+.close-dashboard-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem; /* Tamaño grande para la 'X' */
+    color: #e74c3c; /* Color rojo de cierre */
+    font-weight: 300;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 10;
+}
+
+.close-dashboard-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    color: #c0392b; /* Rojo oscuro al pasar el ratón */
+}
+
+/* --------------------------------
+ * SUMARIO GLOBAL (Avance y Costo)
+ * -------------------------------- */
+.global-summary-bar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-item-bar {
+    display: flex;
+    align-items: center;
+}
+
+/* Colores para los valores */
+.value-avance {
+    color: #2ecc71; /* Verde para el avance */
+    font-weight: 800;
+    margin-left: 5px;
+}
+
+.value-costo {
+    color: #f39c12; /* Naranja/Amarillo para el costo */
+    font-weight: 800;
+    margin-left: 5px;
+}
+
+
+/* --------------------------------
+ * DASHBOARD DE FASES
+ * -------------------------------- */
+.phase-dashboard-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Estilos de la tarjeta de fase (Botón) */
+.phase-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    min-height: 120px;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.phase-card.disabled {
+    opacity: 0.4; /* Opacidad para las fases no seleccionadas */
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+.phase-card.enabled:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    border-color: #3498db;
+}
+
+.phase-card.active {
+    border-color: #3498db;
+    background-color: #e8f5fe; /* Un azul claro de fondo para el activo */
+    box-shadow: 0 0 0 3px #3498db80;
+}
+
+.phase-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.phase-card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #34495e;
+}
+
+
+/* --------------------------------
+ * RESPONSIVIDAD BÁSICA
+ * -------------------------------- */
+@media (max-width: 768px) {
+    .project-title {
+        font-size: 2rem;
+        margin-top: 20px; /* Asegura espacio si el botón de cierre se superpone */
+    }
+    
+    .global-summary-bar {
+        flex-direction: column; /* Apilar avance y costo en móvil */
+        gap: 10px;
+        padding: 10px;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .phase-card {
+        width: 45%; /* Dos columnas de tarjetas */
+        min-height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .phase-card {
+        width: 100%; /* Una columna en el móvil más pequeño */
+    }
+}
+
+/* --------------------------------
+ * ENCABEZADO Y BOTÓN DE CIERRE (Ajustes)
+ * -------------------------------- */
+.project-body-header {
+    /* ... (Mantenemos position: relative;) ... */
+}
+
+/* 🔑 1. ESTILO DEL BOTÓN HAMBURGUESA (Posición Izquierda Superior) 🔑 */
+.hamburger-menu-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2.5rem; /* Tamaño adecuado para el ícono ☰ */
+    color: #34495e; /* Color oscuro */
+    font-weight: 600;
+    line-height: 1;
+    padding: 0 10px;
+    opacity: 0.8;
+    transition: opacity 0.2s, color 0.2s;
+    z-index: 10;
+}
+
+.hamburger-menu-button:hover {
+    opacity: 1;
+    color: #3498db; /* Azul al pasar el ratón */
+}
+
+/* --------------------------------
+ * 🔑 2. ESTILOS DEL MENÚ DESPLEGABLE DE HERRAMIENTAS 🔑
+ * -------------------------------- */
+.tools-dropdown-menu {
+    position: absolute;
+    top: 70px; /* Separación del header */
+    left: 0;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 20; /* Asegura que esté por encima de todo */
+    padding: 10px 0;
+    /* Ajuste para que se vea bien en pantallas pequeñas */
+    max-width: 90%; 
+}
+
+.menu-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #2c3e50;
+    padding: 5px 15px 10px;
+    border-bottom: 1px solid #ecf0f1;
+    margin-bottom: 5px;
+}
+
+.tool-menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #34495e;
+    transition: background-color 0.15s;
+}
+
+.tool-menu-item:hover {
+    background-color: #f6f6f6;
+}
+
+.tool-icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}

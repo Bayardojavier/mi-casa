@@ -1,0 +1,289 @@
+/* src/components/Material/InventoryDynamicView.css (COMPLETO Y FINAL) */
+
+/* -----------------------------------------------------------
+   AJUSTES GLOBALES Y CONTENEDORES
+   ----------------------------------------------------------- */
+
+/* 🔑 CORRECCIÓN: Asegura que los contenedores superiores no tengan scroll horizontal forzado */
+.materials-inventory-container,
+.module-content {
+    overflow-x: hidden; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+/* Contenedor de la vista base */
+.inventory-base-view {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔑 CONTENEDOR PRINCIPAL: Maneja AMBOS scrolls (Horizontal y Vertical) */
+.movement-table-container-unified {
+    /* Permite scroll horizontal si el contenido es > 100% y vertical si es > max-height */
+    overflow: auto; 
+    max-height: 500px; /* Altura que activa el scroll vertical (ajustar según necesidad) */
+    margin-top: 15px; 
+    border: 1px solid #ddd; /* Borde para el área de scroll */
+    border-radius: 5px;
+}
+
+/* -----------------------------------------------------------
+   CONTROLES DE AGRUPACIÓN
+   ----------------------------------------------------------- */
+
+.grouping-controls {
+    display: flex; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    gap: 15px;
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+.grouping-checkbox-label { 
+    cursor: pointer; 
+    font-size: 0.9em; 
+    font-weight: 500; 
+    display: flex; 
+    align-items: center; 
+}
+.grouping-checkbox-label input { 
+    margin-right: 5px; 
+}
+
+
+/* -----------------------------------------------------------
+   ESTILOS DE TABLA (UNIFICADA)
+   ----------------------------------------------------------- */
+
+.movement-table-unified {
+    /* ANCHO MÍNIMO: Asegura el scroll horizontal en pantallas pequeñas */
+    min-width: 800px; 
+    width: 100%; /* Ocupa 100% del contenedor de scroll (max-width de 800px) */
+    border-collapse: collapse;
+    font-size: 0.9em;
+    table-layout: fixed; /* Ayuda a alinear las columnas */
+}
+
+/* CELDAS Y ENCABEZADOS */
+.movement-table-unified th, 
+.movement-table-unified td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    /* Ajuste de ancho aproximado de columnas, si quieres ser más específico puedes usar: */
+    width: 114px; /* 800px / 7 columnas */
+}
+
+/* ENCABEZADOS DE COLUMNA */
+.movement-table-unified thead th {
+    background-color: #3f51b5;
+    color: white; 
+    font-weight: 700;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: sticky; /* Opcional: para que se queden fijos al hacer scroll vertical */
+    top: 0; 
+    z-index: 10;
+}
+
+/* 🔑 ALINEACIÓN DE COLUMNAS NUMÉRICAS */
+.movement-table-unified td.quantity,
+.movement-table-unified td.costPerUnitUSD,
+.movement-table-unified td.totalCostUSD {
+    text-align: right;
+    font-family: monospace, sans-serif; /* Mejor para números */
+}
+
+
+/* -----------------------------------------------------------
+   ESTILOS DE FILA POR MODO
+   ----------------------------------------------------------- */
+
+.movement-row-purchase {
+    background-color: #e6ffe6; /* Fondo verde claro */
+    border-left: 5px solid #4CAF50; /* Borde verde */
+    transition: background-color 0.3s;
+}
+.movement-row-outflow {
+    background-color: #ffe6e6; /* Fondo rojo claro */
+    border-left: 5px solid #f44336; /* Borde rojo */
+    transition: background-color 0.3s;
+}
+.movement-row-purchase td:nth-child(2) { 
+    color: #1a7e1a; 
+    font-weight: 700; 
+}
+.movement-row-outflow td:nth-child(2) { 
+    color: #d32f2f; 
+    font-weight: 700; 
+}
+
+
+/* -----------------------------------------------------------
+   ESTILOS DE AGRUPACIÓN (FILA DE RESUMEN)
+   ----------------------------------------------------------- */
+
+.group-header-row {
+    cursor: pointer;
+    background-color: #e0e0e0; 
+    font-weight: 700;
+}
+
+/* 🔑 Estilo para la celda principal (la primera celda dinámica) */
+.group-header-row td:first-child {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    font-weight: 700;
+    border-left: 5px solid #9e9e9e; /* Borde de grupo */
+}
+
+/* Alineación de las cantidades/costos en la fila de resumen */
+.group-header-row td:nth-child(4), /* Cantidad */
+.group-header-row td:nth-child(5), /* Costo Unitario */
+.group-header-row td:nth-child(6) { /* Costo Total */
+    text-align: right;
+    font-family: monospace, sans-serif;
+    font-weight: 900;
+    color: #3f51b5; /* Resaltar los totales */
+}
+
+.group-header-row td {
+    padding: 12px 8px;
+    border-bottom: 2px solid #ccc; /* Separador más grueso */
+    background-color: #e0e0e0;
+}
+
+.group-item-count {
+    font-weight: 400;
+    color: #555;
+    margin-left: 5px;
+    font-size: 0.85em;
+}
+
+.collapse-icon { 
+    font-size: 1.1em; 
+    width: 20px; 
+    text-align: center;
+}
+
+.group-item-row td { 
+    /* Ligeramente más padding para que las filas se vean indentadas dentro del grupo */
+    padding-left: 15px; 
+}
+
+/* Sin movimientos */
+.no-movements {
+    text-align: center !important;
+    font-style: italic;
+    color: #777;
+    padding: 20px !important;
+}
+
+/* Hover en las filas */
+.movement-table-unified tbody tr:not(.group-header-row):hover {
+    background-color: #f0f0f0;
+}
+.movement-table-unified tbody tr.movement-row-purchase:not(.group-header-row):hover {
+    background-color: #d9f3d9;
+}
+.movement-table-unified tbody tr.movement-row-outflow:not(.group-header-row):hover {
+    background-color: #f3d9d9;
+}
+
+/* AJUSTES PARA EL FORMULARIO DE COMPRA (PurchaseForm) */
+
+/* 1. Contenedor Principal: Debe definir la altura total de la "mini-ventana" */
+.purchase-form {
+    display: flex;
+    flex-direction: column;
+    /* Ajusta esta altura máxima. Por ejemplo, 85vh (85% de la altura de la vista) */
+    max-height: 85vh; 
+    overflow: hidden; /* Asegura que no haya scroll en el contenedor padre */
+}
+
+/* 2. Sección Fija: No necesita overflow ni altura fija, toma el espacio necesario */
+.fixed-header-section {
+    flex-shrink: 0; /* No se encoge */
+    padding-bottom: 10px; /* Espacio antes del área de scroll */
+    background-color: white; /* Para cubrir el scroll si la sección es larga */
+    z-index: 20; /* Asegura que esté por encima del contenido scrollable */
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Sombra sutil para indicar la división */
+    margin-bottom: 10px;
+}
+
+/* 3. Sección Scrollable: Toma el espacio restante y añade scroll */
+.scrollable-content-area {
+    flex-grow: 1; /* Crece para llenar el espacio restante */
+    overflow-y: auto; /* 🔑 AÑADE EL SCROLL VERTICAL AQUÍ */
+    padding-right: 15px; /* Espacio extra para que el scroll no choque con los campos */
+    padding-left: 5px; /* Ajuste visual */
+}
+
+/* 4. Botón de Submit Final: Fijo en la parte inferior */
+.submit-button-container {
+    flex-shrink: 0;
+    padding: 15px 0 0;
+    /* Esto es si el submit button estaba antes del fin del formulario */
+    /* Si estaba fuera, solo asegúrate de que esté visible en la ventana principal */
+}
+
+/* Estilos de tabla y grupos (mantenidos) */
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+/* ... otros estilos de .items-table y .header-grid ... */
+
+/* AJUSTES PARA EL FORMULARIO DE COMPRA (PurchaseForm) */
+
+/* 1. Contenedor Principal: Debe definir la altura total de la "mini-ventana" */
+.purchase-form {
+    display: flex;
+    flex-direction: column;
+    /* Ajusta esta altura máxima. Por ejemplo, 85vh o un valor fijo si está en un modal */
+    max-height: 85vh; 
+    overflow: hidden; /* Evita el scroll global */
+    padding: 10px; /* Padding general si lo deseas */
+}
+
+/* 2. Sección Fija: Contiene los detalles generales de la factura */
+.fixed-header-section {
+    flex-shrink: 0; /* No se encoge */
+    padding-bottom: 10px; /* Espacio antes de la zona de scroll */
+    background-color: #ffffff; /* Asegura que el contenido fijo oculte lo que se desplaza */
+    z-index: 20; 
+    /* 🔑 Sombra sutil para visualizar la división entre fijo y scroll */
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.15); 
+    margin-bottom: 10px; 
+}
+
+/* 3. Sección Scrollable: Toma el espacio restante y añade scroll */
+.scrollable-content-area {
+    flex-grow: 1; /* Crece para llenar el espacio restante */
+    overflow-y: auto; /* 🔑 AÑADE EL SCROLL VERTICAL AQUÍ */
+    /* El padding puede ayudar a que la barra de scroll no se vea pegada */
+    padding-right: 10px; 
+}
+
+/* 4. Botón de Submit Final: Fijo en la parte inferior */
+.submit-button-container {
+    flex-shrink: 0;
+    padding: 15px 0 0;
+    margin-top: auto; /* Empuja el botón al final del formulario */
+}
+
+/* Opcional: Para hacer la cabecera de la tabla de ítems sticky dentro del área de scroll */
+.items-table thead tr {
+    position: sticky;
+    top: 0; /* Pega la cabecera de la tabla al borde superior del scrollable-content-area */
+    background-color: #f7f7f7;
+    z-index: 10;
+}

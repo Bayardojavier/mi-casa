@@ -1,0 +1,181 @@
+/* --- Archivo: src/styles/Global.css --- */
+
+/* Tipografía base */
+body, input, button, select, textarea {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: #1F2937; /* Gris oscuro para texto principal */
+  background-color: #F3F4F6; /* Gris claro de fondo */
+}
+
+/* Paleta de colores principal */
+:root {
+  --color-primary: #3B82F6;   /* Azul */
+  --color-secondary: #10B981; /* Verde */
+  --color-accent: #F59E0B;    /* Amarillo / naranja */
+  --color-danger: #EF4444;    /* Rojo */
+  --color-gray-light: #F3F4F6; 
+  --color-gray-dark: #1F2937;
+  --color-white: #FFFFFF;
+}
+
+/* Botones */
+button {
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button.primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+button.primary:hover {
+  background-color: #2563EB; /* Azul más oscuro al hover */
+  transform: scale(1.05);
+}
+
+button.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+button.secondary:hover {
+  background-color: #059669;
+  transform: scale(1.05);
+}
+
+button.danger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+button.danger:hover {
+  background-color: #DC2626;
+  transform: scale(1.05);
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  color: var(--color-gray-dark);
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+}
+
+/* Tarjetas y contenedores */
+.card {
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Inputs y formularios */
+input, select, textarea {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #D1D5DB; /* Gris claro */
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #111827; /* Gris muy oscuro */
+  color: var(--color-white);
+  width: 16rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar button {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.sidebar button:hover {
+  background-color: #1F2937; /* Gris intermedio */
+}
+
+/* Animaciones comunes */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.slide-up {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563EB;
+}
